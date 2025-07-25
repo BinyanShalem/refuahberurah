@@ -339,37 +339,6 @@
                             </button>
                         </div>
                     </form>
-                    <p class="text-center text-sm text-slate-500 pt-4">
-                        No account? <a href="#" id="show-signup" class="font-medium text-primary-600 hover:text-primary-500">Create one</a>
-                    </p>
-                `;
-            },
-            renderSignupForm(error = '') {
-                    return `
-                     <div class="text-center">
-                            <img src="https://raw.githubusercontent.com/BinyanShalem/ShalemBinyan/refs/heads/main/logosss.png" alt="Refuah Berurah Logo" class="h-12 w-auto mx-auto">
-                           <h2 class="mt-6 text-2xl font-bold tracking-tight text-slate-900">Create your account</h2>
-                           <p class="mt-2 text-slate-600">Get started with your secure hub</p>
-                     </div>
-                     <form id="signup-form" class="space-y-4 pt-6">
-                         <div>
-                             <label for="signup-email" class="block text-sm font-medium text-slate-700">Email address</label>
-                             <input type="email" id="signup-email" name="email" autocomplete="email" required class="input">
-                         </div>
-                         <div>
-                             <label for="signup-password" class="block text-sm font-medium text-slate-700">Password</label>
-                             <input type="password" id="signup-password" name="password" autocomplete="new-password" required class="input">
-                         </div>
-                            ${error ? `<p class="text-sm text-red-600">${error}</p>` : ''}
-                         <div>
-                             <button type="submit" class="w-full flex justify-center py-3 px-4 rounded-lg shadow-md text-sm font-semibold text-white bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 transition-all transform hover:scale-105">
-                                 Create Account
-                             </button>
-                         </div>
-                     </form>
-                     <p class="text-center text-sm text-slate-500 pt-4">
-                         Already have an account? <a href="#" id="show-login" class="font-medium text-primary-600 hover:text-primary-500">Sign in</a>
-                     </p>
                 `;
             },
             postRender() {
@@ -388,28 +357,6 @@
                             showLogin(err.message);
                         }
                     });
-                    document.getElementById('show-signup').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        showSignup();
-                    });
-                };
-                const showSignup = (error = '') => {
-                    if (!authContainer) return;
-                    authContainer.innerHTML = this.renderSignupForm(error);
-                    document.getElementById('signup-form').addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        const email = e.target.email.value;
-                        const password = e.target.password.value;
-                        try {
-                            await auth.createUserWithEmailAndPassword(email, password);
-                        } catch (err) {
-                            showSignup(err.message);
-                        }
-                    });
-                            document.getElementById('show-login').addEventListener('click', (e) => {
-                                 e.preventDefault();
-                                 showLogin();
-                             });
                 };
                 showLogin(); // Show login form by default
             }
